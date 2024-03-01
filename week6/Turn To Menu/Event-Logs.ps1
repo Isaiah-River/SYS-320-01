@@ -64,3 +64,15 @@ function getFailedLogins($timeBack){
 
     return $failedloginsTable
 } # End of function getFailedLogins
+
+
+function AtRiskUsers($days){
+        return (getFailedLogins $days | Group-Object -Property User | Where-Object {$_.Count -ge 10} | Select Name, Count | Out-String)
+}
+
+function LastTenFailedLogins($days){
+    $failedLogins = GetFailedLogins $days
+    $lastTenFailedLogins = $failedLogins | Sort-Object -Property TimeStamp -Descending | Select-Object -First 10
+    Write-Host "Last ten failed logins from all users:"
+    Write-Host ($lastTenFailedLogins | Format-Table | Out-String)
+}

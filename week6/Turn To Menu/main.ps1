@@ -29,16 +29,14 @@ while($operation){
     }
     elseif($choice -eq 2){
         $days = Read-Host "How many days back would you like to get failed logins from?"
-        $failedLogins = GetFailedLogins $days
-        $lastTenFailedLogins = $failedLogins | Sort-Object -Property TimeStamp -Descending | Select-Object -First 10
-        Write-Host "Last ten failed logins from all users:"
-        Write-Host ($lastTenFailedLogins | Format-Table | Out-String)
+        LastTenFailedLogins $days
+        
     }
     elseif($choice -eq 3){
         Write-Host "This function shows a list of users with 10 or more failed logins from a selected number of days back."
         $days = Read-Host -Prompt "How many days back would you like to check from? "
         Write-Host "Affected Users:"
-        Write-Host (getFailedLogins $days | Group-Object -Property User | Where-Object {$_.Count -ge 10} | Select Name, Count | Out-String)
+        AtRiskUsers $days
     }
     elseif($choice -eq 4){
         Chrome
