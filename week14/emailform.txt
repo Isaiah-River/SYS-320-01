@@ -1,0 +1,4 @@
+To: isaiah.river@mymail.champlain.edu
+Subject: Logins
+Apr 26 lightdm
+Apr 26 champuser
